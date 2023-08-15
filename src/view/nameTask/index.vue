@@ -1,7 +1,20 @@
 <script setup>
 import Minxter from "./search/data";
-const { ruleForm, rules, formSize, ruleFormRef, reachInfo, resetInfo } =
-  Minxter();
+import { ArrowLeft } from "@element-plus/icons-vue";
+import Tabs from "@/components/tabs/index.vue";
+const {
+  ruleForm,
+  rules,
+  formSize,
+  ruleFormRef,
+  isChangeIcon,
+  citylist,
+  typelist,
+  reachInfo,
+  resetInfo,
+  searchInfo,
+  handelChange,
+} = Minxter();
 </script>
 <template>
   <div>
@@ -36,9 +49,46 @@ const { ruleForm, rules, formSize, ruleFormRef, reachInfo, resetInfo } =
               >搜索</el-button
             >
             <el-button plain @click="resetInfo(ruleFormRef)">重置</el-button>
+            <el-button
+              type="primary"
+              plain
+              @click="searchInfo"
+              :icon="isChangeIcon ? 'ArrowDown' : 'ArrowLeft'"
+              >更多搜索</el-button
+            >
           </div>
         </el-col>
       </el-row>
+      <transition>
+        <div v-show="isChangeIcon">
+          <el-row gutter="20">
+            <el-col :span="6">
+              <el-form-item label="开始时间" prop="startTime">
+                <el-input v-model="ruleForm.startTime" />
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="结束时间" prop="endTime">
+                <el-input v-model="ruleForm.endTime" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-form-item label="城市">
+              <Tabs
+                :lists="citylist"
+                @change="handelChange"
+                :isMultiple="false"
+              />
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="类别">
+              <Tabs :lists="typelist" @change="handelChange" />
+            </el-form-item>
+          </el-row>
+        </div>
+      </transition>
     </el-form>
   </div>
 </template>
