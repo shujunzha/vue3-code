@@ -1,7 +1,14 @@
 <script setup>
 import Minxter from "./search/data";
-import { ArrowLeft } from "@element-plus/icons-vue";
+import {
+  ArrowLeft,
+  ArrowDown,
+  Plus,
+  Upload,
+  Close,
+} from "@element-plus/icons-vue";
 import Tabs from "@/components/tabs/index.vue";
+import StatusDot from "@/components/StatusDot/index.vue";
 const {
   ruleForm,
   rules,
@@ -10,10 +17,15 @@ const {
   isChangeIcon,
   citylist,
   typelist,
+  tableData,
+  tableInfo,
   reachInfo,
   resetInfo,
   searchInfo,
   handelChange,
+  deleteRow,
+  handleSelectionChange,
+  delGroub,
 } = Minxter();
 </script>
 <template>
@@ -90,6 +102,60 @@ const {
         </div>
       </transition>
     </el-form>
+    <div class="btnGroub">
+      <div class="leftBtn">
+        <el-button type="primary" :icon="Plus">新增</el-button>
+        <el-button type="danger" :icon="Close" @click="delGroub"
+          >批量删除</el-button
+        >
+      </div>
+      <div class="rightBtn">
+        <el-button plain :icon="Upload">导出</el-button>
+      </div>
+    </div>
+    <div class="tab">
+      <el-table
+        :data="tableData"
+        height="250"
+        border
+        style="width: 100%"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column type="selection" width="55" />
+        <el-table-column type="index" label="序号" width="60" />
+        <!-- <el-table-column prop="date" label="日期" /> -->
+        <template v-for="item in tableInfo" :key="item.id">
+          <el-table-column :prop="item.prop" :label="item.label">
+            <template #default="scope">
+              <div v-if="item.isSlot && item.prop === 'status'">
+                <StatusDot :text="scope.row.status" :value="'123'"></StatusDot>
+              </div>
+              <div v-else>{{ scope.row[item.prop] }}</div>
+            </template>
+          </el-table-column>
+        </template>
+        <el-table-column label="操作">
+          <template #default="scope">
+            <el-button size="small" plain>查看</el-button>
+            <el-button size="small" type="primary">编辑</el-button>
+            <el-button
+              plain
+              type="danger"
+              size="small"
+              @click.prevent="deleteRow(scope.$index)"
+            >
+              删除
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
   </div>
 </template>
-<style scoped></style>
+<style scoped>
+.btnGroub {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+</style>
