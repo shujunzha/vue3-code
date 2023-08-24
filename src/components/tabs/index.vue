@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref, defineEmits } from "vue";
+import { ref } from "vue";
 import src from "@/assets/select.png";
 defineProps({
   lists: Array,

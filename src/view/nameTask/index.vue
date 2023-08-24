@@ -19,6 +19,11 @@ const {
   typelist,
   tableData,
   tableInfo,
+  tabRef,
+  height,
+  currentPage,
+  pageSize,
+  total,
   reachInfo,
   resetInfo,
   searchInfo,
@@ -26,6 +31,8 @@ const {
   deleteRow,
   handleSelectionChange,
   delGroub,
+  handleSizeChange,
+  handleCurrentChange,
 } = Minxter();
 </script>
 <template>
@@ -113,10 +120,10 @@ const {
         <el-button plain :icon="Upload">导出</el-button>
       </div>
     </div>
-    <div class="tab">
+    <div class="tab" ref="tabRef">
       <el-table
         :data="tableData"
-        height="250"
+        :height="height"
         border
         style="width: 100%"
         @selection-change="handleSelectionChange"
@@ -149,6 +156,19 @@ const {
           </template>
         </el-table-column>
       </el-table>
+    </div>
+    <div class="table-pagination">
+      <el-pagination
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :page-sizes="[10, 20, 30, 40]"
+        :small="small"
+        background
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total"
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+      />
     </div>
   </div>
 </template>

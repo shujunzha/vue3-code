@@ -1,10 +1,15 @@
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 export default function Minxter() {
   const formSize = ref("default");
   const ruleFormRef = ref();
   const isChangeIcon = ref(false);
   const selectList = ref([]);
+  const tabRef = ref();
+  const height = ref("auto");
+  const currentPage = ref(1);
+  const pageSize = ref(10);
+  const total = ref(20);
   const ruleForm = reactive({
     name: "",
     address: "",
@@ -130,6 +135,7 @@ export default function Minxter() {
   // 搜索
   const reachInfo = async (formEl) => {
     console.log(formEl);
+
     if (!formEl) return;
     await formEl.validate((valid, fields) => {
       if (valid) {
@@ -165,6 +171,7 @@ export default function Minxter() {
     selectList.value = value;
     console.log(selectList.value);
   }
+  //批量删除
   function delGroub() {
     if (selectList.value.length < 1) {
       ElMessage.info("请选择要批量删除的数据");
@@ -188,6 +195,30 @@ export default function Minxter() {
         });
     }
   }
+  //生命周期函数
+  onMounted(() => {
+    // 初始化高度
+    autoHight();
+    // 根据窗口高度自适应tab高度
+    window.onresize = () => {
+      autoHight();
+    };
+  });
+  // 自适应高度
+  function autoHight() {
+    // tab高度
+    let tabHight = tabRef.value.getBoundingClientRect().top;
+    // 浏览器视图框高度
+    let bodyHight = document.body.clientHeight;
+    //
+    let heightPagination = 80;
+    // 浏览器视图框高度减去tab高度
+    let heightOne = bodyHight - tabHight - heightPagination;
+    height.value = `${heightOne}px`;
+    return height.value;
+  }
+  function handleSizeChange() {}
+  function handleCurrentChange() {}
   return {
     ruleForm,
     rules,
@@ -198,6 +229,11 @@ export default function Minxter() {
     typelist,
     tableData,
     tableInfo,
+    tabRef,
+    height,
+    currentPage,
+    pageSize,
+    total,
     reachInfo,
     resetInfo,
     searchInfo,
@@ -205,5 +241,7 @@ export default function Minxter() {
     deleteRow,
     handleSelectionChange,
     delGroub,
+    handleSizeChange,
+    handleCurrentChange,
   };
 }
