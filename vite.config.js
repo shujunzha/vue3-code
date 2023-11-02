@@ -105,6 +105,7 @@ export default defineConfig({
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
       "@_c": path.resolve("src/components"),
+      "vue$": "vue/dist/vue.esm-bundler.js"
     },
     // 导入时想要省略的扩展名列表
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
@@ -162,4 +163,10 @@ export default defineConfig({
     //chunk 大小警告的限制
     chunkSizeWarningLimit: 500,
   },
+//   css: {
+//     postcss: {
+//         plugins: [require('tailwindcss'), require('autoprefixer')],
+//     },
+// },
+
 });

@@ -10,14 +10,27 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.1.0",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
+    "axios": "^1.5.1",
     "element-plus": "^2.3.9",
-    "node-sass": "^9.0.0",
+    "node-sass": "^4.14.1",
     "pinia": "^2.1.4",
-    "vue": "^3.3.4"
+    "qs": "^6.11.2",
+    "sass": "^1.50.0",
+    "sass-loader": "^7.3.1",
+    "sass-resources-loader": "^2.2.4",
+    "three": "^0.148.0",
+    "three-css2drender": "^1.0.0",
+    "three-orbit-controls": "^82.1.0",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
     "@types/node": "^20.4.1",
     "@vitejs/plugin-vue": "^4.2.3",
+    "naive-ui": "^2.35.0",
+    "tailwindcss": "^3.3.5",
     "vite": "^4.4.0"
   }
 }
