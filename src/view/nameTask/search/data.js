@@ -1,15 +1,15 @@
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive,nextTick,onMounted } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 export default function Minxter() {
   const formSize = ref("default");
   const ruleFormRef = ref();
   const isChangeIcon = ref(false);
+  const height = ref('auto')
   const selectList = ref([]);
-  const tabRef = ref();
-  const height = ref("auto");
-  const currentPage = ref(1);
-  const pageSize = ref(10);
-  const total = ref(20);
+  const tabRef = ref()
+  const currentPage = ref(1)
+  const pageSize = ref(10)
+  const total = ref(0)
   const ruleForm = reactive({
     name: "",
     address: "",
@@ -104,6 +104,15 @@ export default function Minxter() {
       date: "2023-5-1",
       status: "已签收",
     },
+    {
+      id: 4,
+      name: "斯皮",
+      address: "下恩镇",
+      fileName: "小说文件",
+      codeNum: "豫Q555",
+      date: "2023-5-1",
+      status: "已签收",
+    },
   ]);
   // 校验规则
   const rules = reactive({
@@ -135,7 +144,6 @@ export default function Minxter() {
   // 搜索
   const reachInfo = async (formEl) => {
     console.log(formEl);
-
     if (!formEl) return;
     await formEl.validate((valid, fields) => {
       if (valid) {
@@ -153,6 +161,10 @@ export default function Minxter() {
   // 展开更多搜索事件
   function searchInfo() {
     isChangeIcon.value = !isChangeIcon.value;
+    setTimeout(()=>{
+      mytable_hight_reset()
+    },30)
+    
   }
   //切换tabs更新数据
   function handelChange() {
@@ -161,6 +173,7 @@ export default function Minxter() {
   //更新数据
   function getDateList() {
     console.log("666");
+    
   }
   // 删除table单行数据
   function deleteRow(index) {
@@ -169,7 +182,6 @@ export default function Minxter() {
   // 选择table选择框
   function handleSelectionChange(value) {
     selectList.value = value;
-    console.log(selectList.value);
   }
   //批量删除
   function delGroub() {
@@ -195,30 +207,31 @@ export default function Minxter() {
         });
     }
   }
-  //生命周期函数
-  onMounted(() => {
-    // 初始化高度
-    autoHight();
-    // 根据窗口高度自适应tab高度
+  onMounted(()=>{
+    mytable_hight_reset()
     window.onresize = () => {
-      autoHight();
+      mytable_hight_reset();
     };
-  });
-  // 自适应高度
-  function autoHight() {
-    // tab高度
-    let tabHight = tabRef.value.getBoundingClientRect().top;
-    // 浏览器视图框高度
-    let bodyHight = document.body.clientHeight;
-    //
-    let heightPagination = 80;
-    // 浏览器视图框高度减去tab高度
-    let heightOne = bodyHight - tabHight - heightPagination;
-    height.value = `${heightOne}px`;
-    return height.value;
+  })
+  //表格高度计算
+  function mytable_hight_reset(){   
+    nextTick (()=>{
+    // tab表格距离视窗上边的距离
+    const tabHight = tabRef.value.getBoundingClientRect().top
+    const bodyHight = document.body.clientHeight
+    const paginationHight = 65
+    let heightOne =  bodyHight -tabHight -paginationHight
+    height.value = `${heightOne}px`
+    return height.value
+    })
+
   }
-  function handleSizeChange() {}
-  function handleCurrentChange() {}
+  function handleSizeChange(val){
+    pageSize.value = val
+  }
+  function handleCurrentChange(val){
+    currentPage.value=val
+  }
   return {
     ruleForm,
     rules,
@@ -229,8 +242,8 @@ export default function Minxter() {
     typelist,
     tableData,
     tableInfo,
-    tabRef,
     height,
+    tabRef,
     currentPage,
     pageSize,
     total,
@@ -242,6 +255,6 @@ export default function Minxter() {
     handleSelectionChange,
     delGroub,
     handleSizeChange,
-    handleCurrentChange,
+    handleCurrentChange
   };
 }

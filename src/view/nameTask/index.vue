@@ -1,11 +1,12 @@
 <script setup>
+import { onUpdated } from "vue";
 import Minxter from "./search/data";
 import {
   ArrowLeft,
   ArrowDown,
   Plus,
   Upload,
-  Close,
+  Close
 } from "@element-plus/icons-vue";
 import Tabs from "@/components/tabs/index.vue";
 import StatusDot from "@/components/StatusDot/index.vue";
@@ -19,8 +20,8 @@ const {
   typelist,
   tableData,
   tableInfo,
-  tabRef,
   height,
+  tabRef,
   currentPage,
   pageSize,
   total,
@@ -32,16 +33,15 @@ const {
   handleSelectionChange,
   delGroub,
   handleSizeChange,
-  handleCurrentChange,
+  handleCurrentChange
 } = Minxter();
-</script>
+</script>  
 <template>
   <div>
     <el-form
       ref="ruleFormRef"
       :model="ruleForm"
       :rules="rules"
-      label-width="120px"
       class="demo-ruleForm"
       :size="formSize"
       status-icon
@@ -64,17 +64,14 @@ const {
         </el-col>
         <el-col :span="6">
           <div>
-            <el-button type="primary" @click="reachInfo(ruleFormRef)"
-              >搜索</el-button
-            >
+            <el-button type="primary" @click="reachInfo(ruleFormRef)">搜索</el-button>
             <el-button plain @click="resetInfo(ruleFormRef)">重置</el-button>
             <el-button
               type="primary"
               plain
               @click="searchInfo"
               :icon="isChangeIcon ? 'ArrowDown' : 'ArrowLeft'"
-              >更多搜索</el-button
-            >
+            >更多搜索</el-button>
           </div>
         </el-col>
       </el-row>
@@ -94,11 +91,7 @@ const {
           </el-row>
           <el-row>
             <el-form-item label="城市">
-              <Tabs
-                :lists="citylist"
-                @change="handelChange"
-                :isMultiple="false"
-              />
+              <Tabs :lists="citylist" @change="handelChange" :isMultiple="false" />
             </el-form-item>
           </el-row>
           <el-row>
@@ -112,9 +105,7 @@ const {
     <div class="btnGroub">
       <div class="leftBtn">
         <el-button type="primary" :icon="Plus">新增</el-button>
-        <el-button type="danger" :icon="Close" @click="delGroub"
-          >批量删除</el-button
-        >
+        <el-button type="danger" :icon="Close" @click="delGroub">批量删除</el-button>
       </div>
       <div class="rightBtn">
         <el-button plain :icon="Upload">导出</el-button>
@@ -123,15 +114,15 @@ const {
     <div class="tab" ref="tabRef">
       <el-table
         :data="tableData"
-        :height="height"
         border
         style="width: 100%"
+        :height="height"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55" />
         <el-table-column type="index" label="序号" width="60" />
         <!-- <el-table-column prop="date" label="日期" /> -->
-        <template v-for="item in tableInfo" :key="item.id">
+        <template v-for="item in tableInfo" :key="item.prop">
           <el-table-column :prop="item.prop" :label="item.label">
             <template #default="scope">
               <div v-if="item.isSlot && item.prop === 'status'">
@@ -145,24 +136,17 @@ const {
           <template #default="scope">
             <el-button size="small" plain>查看</el-button>
             <el-button size="small" type="primary">编辑</el-button>
-            <el-button
-              plain
-              type="danger"
-              size="small"
-              @click.prevent="deleteRow(scope.$index)"
-            >
-              删除
-            </el-button>
+            <el-button plain type="danger" size="small" @click.prevent="deleteRow(scope.$index)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <div class="table-pagination">
       <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
+        :current-page="currentPage"
+        :page-size="pageSize"
         :page-sizes="[10, 20, 30, 40]"
-        :small="small"
+        small
         background
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -177,5 +161,10 @@ const {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.demonstration {
+  margin-top: 10px;
+  text-align: right;
 }
 </style>

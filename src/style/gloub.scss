@@ -1,0 +1,101 @@
+@import "./mixin.scss";
+
+
+.theme-bg {
+  @include bg-color($bg-ming);
+}
+
+.box-tack{
+  @include name-tack;
+}
+
+:root {
+  /* ---- 主要色彩：黑白灰 ---- */
+  --yj-global-title-black: #262626;  /* 标题 */
+  --yj-global-primary-grey: #595959; /* 主文本 */
+  --yj-golbal-secondary-grey: #8C8C8C; /* 次文本 */
+  --yj-golbal-disabled-grey: #BFBFBF; /* 禁用 */
+  --yj-golbal-border-grey: #D9D9D9; /* 框 */
+  --yj-golbal-line-grey: #E6E6E6; /* 线 */
+  --yj-golbal-hover-grey: #F0F0F0; /* 悬浮 */
+  --yj-golbal-bg-grey: #F0F0F0; /* 背景 */
+  --yj-golbal-light-grey: #FAFAFA; /* 列表标题 */
+  --yj-golbal-white: #FFFFFF; /* 内容 */
+
+  /* ---- 主要色彩：常用 ---- */
+  --yj-global-primary: #2E83F8; /* 主题色 */
+  --yj-global-success: #67C239; /* 成功色 */
+  --yj-global-wraning: #FAAD14; /* 提醒色 */
+  --yj-global-danger: #F5222D; /* 警惕色 */
+  --yj-global-select-bg: #E8F4FF; /* 选中背景色、表格悬浮色、表头 */
+  --yj-global-stripe-bg: #F8FAFF; /* 默认斑马条颜色 */
+
+  /* ---- 容器色彩 ---- */
+  --yj-golbal-disabled-bg: #F5F5F5; /* 失效 */
+
+  /* ---- 文本 ------ */
+  --yj-global-primary-font: 14px;
+  --yj-global-secondary-font: 12px;
+}
+
+/* 竖向简化步骤条 */
+.el-steps.el-steps--vertical--simple .el-step__main {
+    padding-left: 7px;
+  }
+  .el-steps.el-steps--vertical--simple .el-step__head.is-wait {
+    border-color: var(--yj-golbal-border-grey);
+  }
+  .el-steps.el-steps--vertical--simple .el-step__head.is-wait .el-step__icon {
+    background-color: #ffffff;
+  }
+  .el-steps.el-steps--vertical--simple .el-step__line {
+    top: 8px;
+    bottom: -9px;
+    left: 4px;
+  }
+  .el-steps.el-steps--vertical--simple .el-step__title.is-finish {
+    color: var(--yj-global-primary);
+  }
+  .el-steps.el-steps--vertical--simple .el-step__title:not(.is-finish) {
+    color: var(--yj-global-primary-grey);
+    font-weight: 500;
+  }
+  .el-steps.el-steps--vertical--simple .el-step__icon {
+    width: 10px;
+    height: 10px;
+  }
+  .el-steps.el-steps--vertical--simple .el-step__icon-inner {
+    display: none;
+  }
+  .el-steps.el-steps--vertical--simple .is-process .el-step__icon {
+    border-color: var(--yj-global-primary);
+    background-color: #ffffff !important;
+  }
+  .el-steps.el-steps--vertical--simple .is-finish .el-step__line {
+    background-color: var(--yj-golbal-border-grey);
+  }
+  .el-steps.el-steps--vertical--simple .is-finish .el-step__icon {
+    background: var(--yj-global-primary);
+    border: 2px solid #c0d4e9;
+  }
+  
+  .el-steps.el-steps--process--finish .el-step__line,
+  .el-steps.el-steps--process--finish .el-step__icon {
+    background-color: var(--yj-global-success) !important;
+    border-color: var(--yj-global-success);
+  }
+  .searchTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    margin-left: 20px;
+  }
+  .searchTitle::before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 16px;
+    background: #409eff;
+    float: left;
+    margin: 4px 5px 0 0;
+  }

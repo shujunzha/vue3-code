@@ -1,24 +1,25 @@
 <script setup>
-import { ref, defineProps } from "vue";
+import { ref } from "vue";
 const props = defineProps({
   text: {
     type: String,
-    default: undefined,
+    default: undefined
   },
   value: {
     type: String,
-    default: undefined,
+    default: undefined
   },
   type: {
     type: String,
-    default: "default",
-  },
+    default: "default"
+  }
 });
 </script>
 <template>
-  <div class="flex status-dot justfity-between justfity-between" :class="type">
-    {{ text }} {{ value }}
-  </div>
+  <div
+    class="flex status-dot justfity-between justfity-between"
+    :class="type"
+  >{{ text }} {{ value }}</div>
 </template>
 <style scoped>
 .flex {

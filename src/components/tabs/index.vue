@@ -1,12 +1,12 @@
 <script setup>
 import { ref } from "vue";
 import src from "@/assets/select.png";
-defineProps({
+const props = defineProps({
   lists: Array,
   isMultiple: {
     type: Boolean,
-    default: true,
-  },
+    default: true
+  }
 });
 const emit = defineEmits(["change"]);
 const dateList = ref([]);
@@ -16,34 +16,15 @@ function changeInput(val) {
 </script>
 <template>
   <div class="all-tabs">
-    <el-checkbox-group
-      v-model="dateList"
-      @change="changeInput"
-      v-if="isMultiple"
-    >
-      <el-checkbox
-        v-for="list in lists"
-        :key="list.value"
-        :label="list.value"
-        border
-      >
+    <el-checkbox-group v-model="dateList" @change="changeInput" v-if="isMultiple">
+      <el-checkbox v-for="list in lists" :key="list.value" :label="list.value" border>
         <span>{{ list.lable }}</span>
-        <img
-          class="select-icon"
-          :src="src"
-          alt
-          v-if="dateList.indexOf(list.value) > -1"
-        />
+        <img class="select-icon" :src="src" alt v-if="dateList.indexOf(list.value) > -1" />
       </el-checkbox>
     </el-checkbox-group>
 
     <el-radio-group v-model="dateList" @change="changeInput" v-else>
-      <el-radio
-        v-for="list in lists"
-        :key="list.value"
-        :label="list.value"
-        border
-      >
+      <el-radio v-for="list in lists" :key="list.value" :label="list.value" border>
         <span>{{ list.lable }}</span>
         <img class="select-icon" :src="src" alt v-if="dateList == list.value" />
       </el-radio>
