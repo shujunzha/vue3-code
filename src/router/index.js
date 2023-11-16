@@ -2,11 +2,13 @@ import { createRouter, createWebHistory} from 'vue-router'
 // 1. 定义路由组件.
 // 也可以从其他文件导入
 const About = () => import("@/view/nameTask/about/index.vue")
+const Farmery = () => import("@/view/nameTask/farmery/index.vue")
 const Home = () => import("@/view/nameTask/home/index.vue")
 const Search = () => import("@/view/nameTask/index.vue") 
-
+const Login = () => import("@/view/login/login.vue")
 const Father = () => import("@/view/faterSon/faterToSon/index.vue") 
 const Test = ()=>import("@/view/testView/test.vue")
+const Slider = ()=>import("@/view/slider/index.vue")
 const Editor = () => import("@/components/editor/index.vue") 
 const MyForm = () => import("@/view/formView/index.vue") 
 const Compont = () => import("@/view/commonView/terninal.vue") 
@@ -22,6 +24,9 @@ const routes = [
   { path: '/test', component: Test },
   { path: '/editor', component: Editor },
   { path: '/compont', component: Compont },
+  { path: '/slider', component: Slider },
+  { path: '/login', component: Login },
+  { path: '/farmery', component: Farmery },
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
