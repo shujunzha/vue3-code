@@ -3,7 +3,13 @@ export function textLength(string,limit){
         return string.substring(0, limit) + '...';
     }
 }
-// 防抖函数
+
+/**
+ * 函数debounce用于延迟函数的执行
+ * @param {Function} func - 需要延迟执行的函数
+ * @param {number} [wait=3000] - 延迟的时间，单位为毫秒，默认为3000毫秒
+ * @returns {Function} - 延迟执行的函数
+ */
 export function debounce(func, wait=3000) {
     let timeout;
     return function() {
