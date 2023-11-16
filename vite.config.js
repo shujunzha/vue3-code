@@ -162,7 +162,11 @@ export default defineConfig({
     emptyOutDir: true,
     //chunk 大小警告的限制
     chunkSizeWarningLimit: 500,
+    target:['edge90','chrome90','firefox90','safari15']
   },
+  optimizeDeps: {
+		include: ['schart.js']
+	}
 //   css: {
 //     postcss: {
 //         plugins: [require('tailwindcss'), require('autoprefixer')],
