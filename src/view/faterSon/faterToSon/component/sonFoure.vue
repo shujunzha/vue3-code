@@ -1,14 +1,9 @@
 <template>
-  <div>{{ qqq }}</div>
+  <div>4.{{ qqq }}</div>
 </template>
 
 <script setup>
 import { ref, inject } from "vue";
-defineExpose({
-  open(info) {
-    console.log(info);
-  }
-});
 const qqq = inject("qqq");
 </script>
 

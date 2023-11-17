@@ -1,12 +1,16 @@
 <template>
-  <div>{{info}}</div>
+  <div>
+    <div>3.{{infoS}}</div>
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+const infoS = ref("666");
 defineExpose({
   open(info) {
-    console.log(info);
+    infoS.value = info;
+    console.log(infoS.value);
   }
 });
 </script>
