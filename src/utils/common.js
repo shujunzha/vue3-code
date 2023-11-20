@@ -1,5 +1,3 @@
-import { ref, reactive, markRaw, defineAsyncComponent } from "vue";
-
 export function textLength(string,limit){
     if(string.length > limit){
         return string.substring(0, limit) + '...';
@@ -44,13 +42,4 @@ export function formatDate(date, fmt) {
       }
     }
     return fmt;
-}
-
-export function renderComponents(modules){
-  let components = ref({});
-  Object.entries(modules).forEach(([path, asyncCom]) => {
-    const name = path.replace(/\.\/compontent\/(.*)\.vue/, "$1");
-    components.value[name] = markRaw(defineAsyncComponent(asyncCom));
-  });
-  return components
-}
+  }

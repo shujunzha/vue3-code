@@ -25,7 +25,6 @@ function handelAction() {
   emit("action", num.value);
 }
 function handelRefure() {
-  demo1.value = 1;
   emit("reful");
 }
 </script>

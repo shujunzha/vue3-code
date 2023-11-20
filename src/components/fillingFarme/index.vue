@@ -20,13 +20,7 @@
           ></el-step>
         </el-steps>
       </div>
-      <div class="center_contant">
-        <slot name="contantForm">
-          <div v-for="item in sliderList" :key="item.formField">
-            <slot :name="item.components"></slot>
-          </div>
-        </slot>
-      </div>
+      <div class="center_contant"></div>
       <div class="right_contant" v-if="isShowRight"></div>
     </div>
   </div>
@@ -104,19 +98,6 @@ $headerHeight: 38px;
   }
   .center_contant {
     flex: 1;
-    padding: 0 20px;
-    .title_text {
-      margin: 0 0 10px 0;
-      &::before {
-        content: "";
-        display: block;
-        width: 2px;
-        height: 18px;
-        float: left;
-        background-color: #409eff;
-        margin: 3px 5px 0 0;
-      }
-    }
   }
 }
 </style>
