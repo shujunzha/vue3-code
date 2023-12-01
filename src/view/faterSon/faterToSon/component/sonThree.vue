@@ -4,10 +4,14 @@
 
 <script setup>
 import { ref } from "vue";
+const firstMsg = ref("第一信息");
+const info = ref("m母鸡");
+function open(info) {
+  console.log(info, "1111");
+}
 defineExpose({
-  open(info) {
-    console.log(info);
-  }
+  open,
+  firstMsg
 });
 </script>
 

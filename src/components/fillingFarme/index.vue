@@ -20,7 +20,13 @@
           ></el-step>
         </el-steps>
       </div>
-      <div class="center_contant"></div>
+      <div class="center_contant">
+        <slot name="contantForm">
+          <div v-for="(item,index) in sliderList" :key="index">
+            <slot :name="item.components"></slot>
+          </div>
+        </slot>
+      </div>
       <div class="right_contant" v-if="isShowRight"></div>
     </div>
   </div>
